@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Polarith.AI.Editor.Formation</name>
+    </assembly>
+    <members>
+        <member name="T:Polarith.AI.MoveEditor.AIMFormationEditor">
+            <summary>
+            Custom editor for each derived <see cref="T:Polarith.AI.Move.AIMFormation"/>. When inheriting from this class, the two
+            methods <see cref="M:Polarith.AI.MoveEditor.AIMBehaviourEditor.DrawBehaviourInspector"/> and 
+            <see cref="M:Polarith.AI.MoveEditor.AIMBehaviourEditor.DrawGizmoInspector"/> needs to be implemented. These methods define what is shown 
+            in the three corresponding inspector tabs. 
+            <para/>
+            Note that <see cref="M:Polarith.AI.MoveEditor.AIMBehaviourEditor.Awake"/>, <see cref="M:Polarith.AI.MoveEditor.AIMBehaviourEditor.OnEnable"/>, <see
+            cref="M:Polarith.AI.MoveEditor.AIMBehaviourEditor.OnInspectorGUI"/>, <see cref="M:Polarith.AI.MoveEditor.AIMBehaviourEditor.DrawEnvironmentInspector"/>, <see
+            cref="M:Polarith.AI.MoveEditor.AIMBehaviourEditor.DrawBehaviourInspector"/>, and <see cref="M:Polarith.AI.MoveEditor.AIMBehaviourEditor.DrawGizmoInspector"/> are
+            already implemented for this level of inheritance, so the base versions of these methods should be called for
+            each overridden version of these methods.
+            </summary>
+        </member>
+    </members>
+</doc>
