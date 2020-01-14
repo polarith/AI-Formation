@@ -213,20 +213,20 @@
         </member>
         <member name="P:Polarith.AI.Move.Formation.InnerCatchUpRadius">
             <summary>
-            Inner radius within the agent keeps its to keep next to the target position. This 
-            radius must be greater or equal to the <see cref="P:Polarith.AI.Move.Formation.ArriveRadius"/>, but smaller than the 
-            <see cref="P:Polarith.AI.Move.Formation.OuterCatchUpRadius"/>. The magnitude is constantly 1 between the <see cref="P:Polarith.AI.Move.Formation.ArriveRadius"/> and 
-            the <see cref="P:Polarith.AI.Move.Formation.InnerCatchUpRadius"/> or 1 + a value between 0 and 1, based on the distance to the 
-            <see cref="P:Polarith.AI.Move.Formation.InnerCatchUpRadius"/> and <see cref="P:Polarith.AI.Move.Formation.OuterCatchUpRadius"/>, times the 
+            Inner radius within the agent keeps its to keep next to the target position. This
+            radius must be greater or equal to the <see cref="P:Polarith.AI.Move.Formation.ArriveRadius"/>, but smaller than the
+            <see cref="P:Polarith.AI.Move.Formation.OuterCatchUpRadius"/>. The magnitude is constantly 1 between the <see cref="P:Polarith.AI.Move.Formation.ArriveRadius"/> and
+            the <see cref="P:Polarith.AI.Move.Formation.InnerCatchUpRadius"/> or 1 + a value between 0 and 1, based on the distance to the
+            <see cref="P:Polarith.AI.Move.Formation.InnerCatchUpRadius"/> and <see cref="P:Polarith.AI.Move.Formation.OuterCatchUpRadius"/>, times the
             <see cref="P:Polarith.AI.Move.Formation.CatchUpMultiplier"/>.
             </summary>
         </member>
         <member name="P:Polarith.AI.Move.Formation.OuterCatchUpRadius">
             <summary>
-            Outer radius within the agent accelerates to keep next to the target position. This radius must be greater 
-            or equal to the <see cref="P:Polarith.AI.Move.Formation.InnerCatchUpRadius"/>. This is necessary if the formation rotates, since the 
-            outer agents need to move a longer distance. The magnitude is 1 + a value between 0 and 1, based on the 
-            distance to the <see cref="P:Polarith.AI.Move.Formation.InnerCatchUpRadius"/> and <see cref="P:Polarith.AI.Move.Formation.OuterCatchUpRadius"/>, times the 
+            Outer radius within the agent accelerates to keep next to the target position. This radius must be greater
+            or equal to the <see cref="P:Polarith.AI.Move.Formation.InnerCatchUpRadius"/>. This is necessary if the formation rotates, since the
+            outer agents need to move a longer distance. The magnitude is 1 + a value between 0 and 1, based on the
+            distance to the <see cref="P:Polarith.AI.Move.Formation.InnerCatchUpRadius"/> and <see cref="P:Polarith.AI.Move.Formation.OuterCatchUpRadius"/>, times the
             <see cref="P:Polarith.AI.Move.Formation.CatchUpMultiplier"/>.
             </summary>
         </member>
@@ -234,8 +234,8 @@
             <summary>
             An additional multiplier to obtain values bigger than the standard magnitude. The standard magnitude is
             equal to 1 and is used between the <see cref="P:Polarith.AI.Move.Formation.ArriveRadius"/> and the <see cref="P:Polarith.AI.Move.Formation.InnerCatchUpRadius"/> to
-            have a constant magnitude. The <see cref="P:Polarith.AI.Move.Formation.CatchUpMultiplier"/> is multiplied with a value between 0 and 1, 
-            based on the distance to the <see cref="P:Polarith.AI.Move.Formation.InnerCatchUpRadius"/> and <see cref="P:Polarith.AI.Move.Formation.OuterCatchUpRadius"/>, 
+            have a constant magnitude. The <see cref="P:Polarith.AI.Move.Formation.CatchUpMultiplier"/> is multiplied with a value between 0 and 1,
+            based on the distance to the <see cref="P:Polarith.AI.Move.Formation.InnerCatchUpRadius"/> and <see cref="P:Polarith.AI.Move.Formation.OuterCatchUpRadius"/>,
             resulting in magnitudes between 1 + [0,1] * <see cref="P:Polarith.AI.Move.Formation.CatchUpMultiplier"/>.
             </summary>
         </member>
@@ -259,6 +259,15 @@
             Recomputes and sets the resulting position for the agent in the formation. Call this method if you
             update parameters that affect the agents position.
             </summary>
+        </member>
+        <member name="M:Polarith.AI.Move.Formation.ChangeOrientation(UnityEngine.Vector3,UnityEngine.Vector3@)">
+            <summary>
+            Flips a vector from xy-plane according to an up vector. Useful to transform a vector lying in the
+            xy-plane if the attached <see cref="T:Polarith.AI.Move.AIMPlanarSensor"/> is not in the xy-plane, e.g. xz-plane. Note that
+            <c>vec</c> is a reference, and thus, is changed inside the function.
+            </summary>
+            <param name="up">3d vector that is perpendicular to the target plane</param>
+            <param name="vec">Reference to the target vector that should be flipped.</param>
         </member>
         <member name="T:Polarith.AI.Move.FormationArrow">
             <summary>
@@ -295,6 +304,12 @@
         <member name="P:Polarith.AI.Move.FormationArrow.Shape">
             <summary>
             Shape of the formation. Change the shape to build the formation in 2D or 3D.
+            </summary>
+        </member>
+        <member name="P:Polarith.AI.Move.FormationArrow.UpVector">
+            <summary>
+            Axis-aligned up Vector of the agent according to the attached <see cref="T:Polarith.AI.Move.AIMSensor"/>. Note that the
+            up vector becomes the forward vector if used with <see cref="F:Polarith.AI.Move.FormationArrow.ShapeType.NonPlanar"/>.
             </summary>
         </member>
         <member name="M:Polarith.AI.Move.FormationArrow.ComputePosition">
@@ -350,6 +365,12 @@
             Shape of the formation. Change the shape to build the formation in 2D or 3D.
             </summary>
         </member>
+        <member name="P:Polarith.AI.Move.FormationBox.UpVector">
+            <summary>
+            Axis-aligned up Vector of the agent according to the attached <see cref="T:Polarith.AI.Move.AIMSensor"/>. Note that the
+            up vector becomes the forward vector if used with <see cref="F:Polarith.AI.Move.FormationBox.ShapeType.NonPlanar"/>.
+            </summary>
+        </member>
         <member name="M:Polarith.AI.Move.FormationBox.ComputePosition">
             <summary>
             Overwritten method to build up a <see cref="T:Polarith.AI.Move.FormationBox"/>, i.e. placing agents as a box, by computing the
@@ -372,6 +393,12 @@
         <member name="P:Polarith.AI.Move.FormationCircle.Solid">
             <summary>
             Solid or boundary agent placement.
+            </summary>
+        </member>
+        <member name="P:Polarith.AI.Move.FormationCircle.UpVector">
+            <summary>
+            Axis-aligned up Vector of the agent according to the attached <see cref="T:Polarith.AI.Move.AIMSensor"/>. Note that the
+            up vector becomes the forward vector if used with <see cref="!:ShapeType.NonPlanar"/>.
             </summary>
         </member>
         <member name="M:Polarith.AI.Move.FormationCircle.ComputePosition">
@@ -413,9 +440,15 @@
             Shape of the formation. Change the shape to be build in 2D or 3D.
             </summary>
         </member>
+        <member name="P:Polarith.AI.Move.FormationCross.UpVector">
+            <summary>
+            Axis-aligned up Vector of the agent according to the attached <see cref="T:Polarith.AI.Move.AIMSensor"/>. Note that the
+            up vector becomes the forward vector if used with <see cref="F:Polarith.AI.Move.FormationCross.ShapeType.NonPlanar"/>.
+            </summary>
+        </member>
         <member name="M:Polarith.AI.Move.FormationCross.ComputePosition">
             <summary>
-            Overwritten method to build up a <see cref="T:Polarith.AI.Move.FormationCross"/>, i.e. placing agents in a line, by computing
+            Overwritten method to build up a <see cref="T:Polarith.AI.Move.FormationCross"/>, i.e., placing agents in a line by computing
             the <see cref="P:Polarith.AI.Move.AIMFormation.TargetPosition"/> of each agent. Units are placed equidistantly on crossing 
             lines with <see cref="P:Polarith.AI.Move.Formation.Spacing"/> as distance between them. This method computes only the position 
             of a single agent with respect to the whole formation.
@@ -425,6 +458,12 @@
             <summary>
             Builds a line-shaped formation, by computing the position for a specific individual (back-end class). Each 
             agent inside the formation is placed equidistantly along a line.
+            </summary>
+        </member>
+        <member name="P:Polarith.AI.Move.FormationLine.UpVector">
+            <summary>
+            Axis-aligned up Vector of the agent according to the attached <see cref="T:Polarith.AI.Move.AIMSensor"/>. Note that the
+            up vector becomes the forward vector if used with <see cref="!:ShapeType.NonPlanar"/>.
             </summary>
         </member>
         <member name="M:Polarith.AI.Move.FormationLine.ComputePosition">
@@ -477,6 +516,12 @@
         <member name="P:Polarith.AI.Move.FormationV.Shape">
             <summary>
             Shape of the formation. Change the shape to build the formation in 2D or 3D.
+            </summary>
+        </member>
+        <member name="P:Polarith.AI.Move.FormationV.UpVector">
+            <summary>
+            Axis-aligned up Vector of the agent according to the attached <see cref="T:Polarith.AI.Move.AIMSensor"/>. Note that the
+            up vector becomes the forward vector if used with <see cref="F:Polarith.AI.Move.FormationV.ShapeType.NonPlanar"/>.
             </summary>
         </member>
         <member name="P:Polarith.AI.Move.FormationV.SparseLayers">
