@@ -68,6 +68,16 @@ namespace Polarith.AI.Package
         [TargetObjective(true)]
         public int ObjectiveAsSpeed = -1;
 
+        /// <summary>
+        /// If true, the movement speed can not become greater than set in <see cref="MovementSpeed"/>. You may disable
+        /// this limitation for scaling with behaviours, and objectives in <see cref="AIMContext"/>, that create 
+        /// magnitudes greater than 1.
+        /// </summary>
+        [Tooltip("If true, the movement speed can not become greater than set in Movement Speed. You may disable " + 
+            "this limitation for scaling with behaviours, and objectives in AIM Context, that create magnitudes " + 
+            "greater than 1.")]
+        public bool LimitSpeed = true;
+
         #endregion // Fields
 
         #region Methods ================================================================================================
@@ -110,7 +120,8 @@ namespace Polarith.AI.Package
             if (ObjectiveAsSpeed >= 0 && ObjectiveAsSpeed < Context.DecidedValues.Count)
             {
                 float magnitude = Context.DecidedValues[ObjectiveAsSpeed] * MovementSpeed;
-                magnitude = magnitude > MovementSpeed ? MovementSpeed : magnitude;
+                if(LimitSpeed)
+                    magnitude = magnitude > MovementSpeed ? MovementSpeed : magnitude;
                 Animator.SetFloat("Speed", magnitude * speedMultiplier);
             }
             else
