@@ -6,7 +6,7 @@
     <members>
         <member name="T:Polarith.Utils.Tuple`2">
             <summary>
-            Struct to store two variables of any type.
+            Struct to store two variables (X,Y) of any type.
             </summary>
         </member>
         <member name="F:Polarith.Utils.Tuple`2.X">
@@ -26,7 +26,7 @@
         </member>
         <member name="T:Polarith.Utils.TupleInt">
             <summary>
-            Struct to store two variables of type integer.
+            Struct to store two variables (X,Y) of type integer.
             </summary>
         </member>
         <member name="F:Polarith.Utils.TupleInt.X">
@@ -52,7 +52,7 @@
         </member>
         <member name="F:Polarith.UnityUtils.ArrowGizmo.Enabled">
             <summary>
-            Determines whether this gizmo is enabled.
+            Determines if this gizmo is enabled.
             </summary>
         </member>
         <member name="F:Polarith.UnityUtils.ArrowGizmo.Color">
@@ -83,7 +83,7 @@
         </member>
         <member name="F:Polarith.UnityUtils.BoxGizmo.Enabled">
             <summary>
-            Determines whether this gizmo is enabled.
+            Determines if this gizmo is enabled.
             </summary>
         </member>
         <member name="F:Polarith.UnityUtils.BoxGizmo.Color">
@@ -114,7 +114,7 @@
         </member>
         <member name="F:Polarith.UnityUtils.VGizmo.Enabled">
             <summary>
-            Determines whether this gizmo is enabled.
+            Determines if this gizmo is enabled.
             </summary>
         </member>
         <member name="F:Polarith.UnityUtils.VGizmo.Color">
@@ -165,23 +165,23 @@
         </member>
         <member name="T:Polarith.AI.Move.Formation">
              <summary>
-             This class extends the <see cref="T:Polarith.AI.Move.SteeringBehaviour"/> through adding general local information about an agents
+             This class extends the <see cref="T:Polarith.AI.Move.SteeringBehaviour"/> through adding general local information about an agent's
              position inside of a formation. The specific shape is defined in derived behaviours.
             
-             <see cref="T:Polarith.AI.Move.Formation"/> computes the position of a single agent as part of a formation, i.e. it's decentralized.
-             The position of a single agent is mainly based on <see cref="P:Polarith.AI.Move.Formation.Size"/> of the whole formation,
-             the <see cref="P:Polarith.AI.Move.Formation.PositionInFormation"/> as its place inside the formation and the
+             <see cref="T:Polarith.AI.Move.Formation"/> computes the position of a single agent as part of a formation, i.e., it's 
+             decentralized. The position of a single agent is primarily based on the <see cref="P:Polarith.AI.Move.Formation.Size"/> of the 
+             whole formation, the <see cref="P:Polarith.AI.Move.Formation.PositionInFormation"/> as its place inside the formation, and the
              <see cref="P:Polarith.AI.Move.Formation.Spacing"/> as horizontal and vertical distance between the agents.
-             <see cref="P:Polarith.AI.Move.AIMFormation.TargetObject"/>, <see cref="P:Polarith.AI.Move.AIMFormation.TargetPosition"/> or
+             <see cref="P:Polarith.AI.Move.AIMFormation.TargetObject"/>, <see cref="P:Polarith.AI.Move.AIMFormation.TargetPosition"/>, or
              <see cref="P:Polarith.AI.Move.AIMFormation.TargetTag"/> may be considered in <see cref="M:Polarith.AI.Move.Formation.ComputePosition"/> in derived
-             classed to move the formation to a specific position or to follow an object that deals as target agent for the
+             classes to move the formation to a specific position or to follow an object that deals as target agent for the
              whole formation.
-             The agents computed target position results in <see cref="F:Polarith.AI.Move.SteeringBehaviour.ResultDirection"/> as a vector from
+             The agents' computed target position results in <see cref="F:Polarith.AI.Move.SteeringBehaviour.ResultDirection"/> as a vector from
              its current position towards its target position. The <see cref="F:Polarith.AI.Move.SteeringBehaviour.ResultMagnitude"/> is based
              on the <see cref="P:Polarith.AI.Move.Formation.DistanceMapping"/>. Note that the mapping can't be inverse.
-             The agent may slow down near its target position within the <see cref="P:Polarith.AI.Move.Formation.ArriveRadius"/> or accelerate
+             The agent may slow down near its target position within the <see cref="P:Polarith.AI.Move.Formation.ArriveRadius"/>, or accelerate
              between the <see cref="P:Polarith.AI.Move.Formation.InnerCatchUpRadius"/> and the <see cref="P:Polarith.AI.Move.Formation.OuterCatchUpRadius"/> to
-             move a faster than its neighboring agents to be able to keep up to its target position event if the
+             move a faster than its neighboring agents. Thus, it's able to keep up to its target position even if the
              formation rotates. The acceleration is scalable with <see cref="P:Polarith.AI.Move.Formation.CatchUpMultiplier"/>.
             
              Every derived <see cref="T:Polarith.AI.Move.Formation"/> needs to implement <see cref="M:Polarith.AI.Move.Formation.ComputePosition"/> to set the
@@ -215,8 +215,9 @@
             <summary>
             Inner radius within the agent keeps its to keep next to the target position. This
             radius must be greater or equal to the <see cref="P:Polarith.AI.Move.Formation.ArriveRadius"/>, but smaller than the
-            <see cref="P:Polarith.AI.Move.Formation.OuterCatchUpRadius"/>. The magnitude is constantly 1 between the <see cref="P:Polarith.AI.Move.Formation.ArriveRadius"/> and
-            the <see cref="P:Polarith.AI.Move.Formation.InnerCatchUpRadius"/> or 1 + a value between 0 and 1, based on the distance to the
+            <see cref="P:Polarith.AI.Move.Formation.OuterCatchUpRadius"/>. This is necessary if the formation rotates, since the outer agents need 
+            to move a longer distance. The magnitude is constantly 1 between the <see cref="P:Polarith.AI.Move.Formation.ArriveRadius"/> and
+            the <see cref="P:Polarith.AI.Move.Formation.InnerCatchUpRadius"/>, or 1 + a value between 0 and 1, based on the distance to the
             <see cref="P:Polarith.AI.Move.Formation.InnerCatchUpRadius"/> and <see cref="P:Polarith.AI.Move.Formation.OuterCatchUpRadius"/>, times the
             <see cref="P:Polarith.AI.Move.Formation.CatchUpMultiplier"/>.
             </summary>
@@ -263,7 +264,7 @@
         <member name="M:Polarith.AI.Move.Formation.ChangeOrientation(UnityEngine.Vector3,UnityEngine.Vector3@)">
             <summary>
             Flips a vector from xy-plane according to an up vector. Useful to transform a vector lying in the
-            xy-plane if the attached <see cref="T:Polarith.AI.Move.AIMPlanarSensor"/> is not in the xy-plane, e.g. xz-plane. Note that
+            xy-plane if the attached <see cref="T:Polarith.AI.Move.AIMPlanarSensor"/> is not in the xy-plane, e.g., xz-plane. Note that
             <c>vec</c> is a reference, and thus, is changed inside the function.
             </summary>
             <param name="up">3d vector that is perpendicular to the target plane</param>
@@ -276,8 +277,8 @@
             <see cref="P:Polarith.AI.Move.FormationArrow.Solid"/>, the agents are placed with a filled center. Otherwise, the agents are placed on the 
             boundary only. In case the <see cref="P:Polarith.AI.Move.FormationArrow.Shape"/> is <see cref="F:Polarith.AI.Move.FormationArrow.ShapeType.Planar"/>, the formation is build up in 
             a 2D layer as a wedge. Otherwise, the formation is build in 3D as an arrow. Note that the last layer may 
-            be sparse if the number of available agents does not exactly fit the total number of agents that arise from the 
-            growing number of agents in each layer.
+            be sparse if the number of available agents does not exactly match the total number of agents that arise from 
+            the growing number of agents in each layer.
             </summary>
         </member>
         <member name="T:Polarith.AI.Move.FormationArrow.ShapeType">
@@ -308,8 +309,8 @@
         </member>
         <member name="P:Polarith.AI.Move.FormationArrow.UpVector">
             <summary>
-            Axis-aligned up Vector of the agent according to the attached <see cref="T:Polarith.AI.Move.AIMSensor"/>. Note that the
-            up vector becomes the forward vector if used with <see cref="F:Polarith.AI.Move.FormationArrow.ShapeType.NonPlanar"/>.
+            Axis-aligned up vector of the agent according to the attached <see cref="T:Polarith.AI.Move.AIMSensor"/>. Note that the
+            up vector becomes the forward vector if used with a <see cref="F:Polarith.AI.Move.FormationArrow.ShapeType.NonPlanar"/> shape.
             </summary>
         </member>
         <member name="M:Polarith.AI.Move.FormationArrow.ComputePosition">
@@ -325,12 +326,12 @@
             <summary>
             Builds a box-shaped formation, by computing the position for a specific individual (back-end class). The shape 
             is primarily based on the number of <see cref="P:Polarith.AI.Move.FormationBox.AgentsPerLine"/>. The first value defines the number of 
-            neighboring agents along the x-axis, i.e., the thickness, while the second value defines the number neighboring 
+            neighboring agents along the x-axis, i.e., the width, while the second value defines the number neighboring 
             agents along the y-axis, i.e., the height. In case the formation is <see cref="P:Polarith.AI.Move.FormationBox.Solid"/>, the agents are placed 
             with a filled center. Otherwise, the agents are placed on the boundary only. In case the <see cref="P:Polarith.AI.Move.FormationBox.Shape"/> is 
             <see cref="F:Polarith.AI.Move.FormationBox.ShapeType.Planar"/>, the formation is build up in a 2D layer, and thus, the second value of 
             <see cref="P:Polarith.AI.Move.FormationBox.AgentsPerLine"/> is ignored. Otherwise, the formation is build in 3D. Note that the last layer may 
-            be sparse if the number of available agents does not exactly fit the total number of agents defined by 
+            be sparse if the number of available agents does not exactly match the total number of agents defined by 
             <see cref="P:Polarith.AI.Move.FormationBox.AgentsPerLine"/>.
             </summary>
         </member>
@@ -352,7 +353,7 @@
         </member>
         <member name="P:Polarith.AI.Move.FormationBox.AgentsPerLine">
             <summary>
-            Number of agents per layer that should be spawned in a line along x-axes (width) and y-axes (height).
+            Number of neighboring agents in width and height of the box-shape.
             </summary>
         </member>
         <member name="P:Polarith.AI.Move.FormationBox.Solid">
@@ -367,13 +368,13 @@
         </member>
         <member name="P:Polarith.AI.Move.FormationBox.UpVector">
             <summary>
-            Axis-aligned up Vector of the agent according to the attached <see cref="T:Polarith.AI.Move.AIMSensor"/>. Note that the
+            Axis-aligned up vector of the agent according to the attached <see cref="T:Polarith.AI.Move.AIMSensor"/>. Note that the
             up vector becomes the forward vector if used with <see cref="F:Polarith.AI.Move.FormationBox.ShapeType.NonPlanar"/>.
             </summary>
         </member>
         <member name="M:Polarith.AI.Move.FormationBox.ComputePosition">
             <summary>
-            Overwritten method to build up a <see cref="T:Polarith.AI.Move.FormationBox"/>, i.e. placing agents as a box, by computing the
+            Overwritten method to build up a <see cref="T:Polarith.AI.Move.FormationBox"/>, i.e., placing agents as a box, by computing the
             <see cref="P:Polarith.AI.Move.AIMFormation.TargetPosition"/> of each agent. <see cref="P:Polarith.AI.Move.FormationBox.AgentsPerLine"/> are placed
             equidistantly on lines with <see cref="P:Polarith.AI.Move.Formation.Spacing"/> as distance between them. The last(bottom) layer
             may be sparse, since there are probably not enough agents. This method computes only the position of a 
@@ -386,8 +387,9 @@
             radius is based on the number of agents and the <see cref="P:Polarith.AI.Move.Formation.Spacing"/>. In case the formation is 
             <see cref="P:Polarith.AI.Move.FormationCircle.Solid"/>, the agents are placed with a filled center, i.e., stacked circles. Otherwise, the agents 
             are placed on the boundary only. Note that agents with a smaller position in the formaiton are placed on the 
-            outside and larger numbers constinously on the inside, and thus, the last agent on the center. In contrast to
-            other formations, the first layer (outer) may be sparse.
+            outside and larger numbers continously on the inside, and thus, the last agent on the center. In contrast to
+            other formations, the first layer (outer) may be sparse if the number of available agents does not match the 
+            total number of agents that are needed for the complete shape.
             </summary>
         </member>
         <member name="P:Polarith.AI.Move.FormationCircle.Solid">
@@ -397,7 +399,7 @@
         </member>
         <member name="P:Polarith.AI.Move.FormationCircle.UpVector">
             <summary>
-            Axis-aligned up Vector of the agent according to the attached <see cref="T:Polarith.AI.Move.AIMSensor"/>. Note that the
+            Axis-aligned up vector of the agent according to the attached <see cref="T:Polarith.AI.Move.AIMSensor"/>. Note that the
             up vector becomes the forward vector if used with <see cref="!:ShapeType.NonPlanar"/>.
             </summary>
         </member>
@@ -416,7 +418,9 @@
         <member name="T:Polarith.AI.Move.FormationCross">
             <summary>
             Builds a cross-shaped formation, by computing the position for a specific individual (back-end class). Each 
-            agent inside the formation is placed equidistantly along crossing lines.
+            agent inside the formation is placed equidistantly along crossing lines. Note that the last layer may be sparse 
+            if the number of available agents does not match the total number of agents that are needed for a symmetric 
+            shape.
             </summary>
         </member>
         <member name="T:Polarith.AI.Move.FormationCross.ShapeType">
@@ -442,7 +446,7 @@
         </member>
         <member name="P:Polarith.AI.Move.FormationCross.UpVector">
             <summary>
-            Axis-aligned up Vector of the agent according to the attached <see cref="T:Polarith.AI.Move.AIMSensor"/>. Note that the
+            Axis-aligned up vector of the agent according to the attached <see cref="T:Polarith.AI.Move.AIMSensor"/>. Note that the
             up vector becomes the forward vector if used with <see cref="F:Polarith.AI.Move.FormationCross.ShapeType.NonPlanar"/>.
             </summary>
         </member>
@@ -462,7 +466,7 @@
         </member>
         <member name="P:Polarith.AI.Move.FormationLine.UpVector">
             <summary>
-            Axis-aligned up Vector of the agent according to the attached <see cref="T:Polarith.AI.Move.AIMSensor"/>. Note that the
+            Axis-aligned up vector of the agent according to the attached <see cref="T:Polarith.AI.Move.AIMSensor"/>. Note that the
             up vector becomes the forward vector if used with <see cref="!:ShapeType.NonPlanar"/>.
             </summary>
         </member>
@@ -476,14 +480,14 @@
         </member>
         <member name="T:Polarith.AI.Move.FormationV">
             <summary>
-            Builds a V-shaped formation, by computing the position for a specific individual (back-end class). The shape is 
-            primarily based on the number of <see cref="P:Polarith.AI.Move.FormationV.AgentsPerLine"/>. The first value defines the number of neighboring 
-            agents along the x-axis, i.e., the thickness, while the second value defines the number neighboring agents along
-            the y-axis, i.e., the height. In case the formation is <see cref="P:Polarith.AI.Move.FormationV.Solid"/>, the agents are placed with a filled 
-            center. Otherwise, the agents are placed on the boundary only. In case the <see cref="P:Polarith.AI.Move.FormationV.Shape"/> is 
-            <see cref="F:Polarith.AI.Move.FormationV.ShapeType.Planar"/>, the formation is build up in a 2D layer, and thus, the second value of 
-            <see cref="P:Polarith.AI.Move.FormationV.AgentsPerLine"/> is ignored. Otherwise, the formation is build in 3D. Note that the last layer may 
-            be sparse if the number of available agents does not exactly fit the total number of agents defined by 
+            Builds a V-shaped formation, by computing the position for a specific individual (back-end class). The shape is
+            primarily based on the number of <see cref="P:Polarith.AI.Move.FormationV.AgentsPerLine"/>. The first value defines the number of neighboring
+            agents along the x-axis, i.e., the width, while the second value defines the number neighboring agents along
+            the y-axis, i.e., the height. In case the formation is <see cref="P:Polarith.AI.Move.FormationV.Solid"/>, the agents are placed with a filled
+            center. Otherwise, the agents are placed on the boundary only. In case the <see cref="P:Polarith.AI.Move.FormationV.Shape"/> is
+            <see cref="F:Polarith.AI.Move.FormationV.ShapeType.Planar"/>, the formation is build up in a 2D layer, and thus, the second value of
+            <see cref="P:Polarith.AI.Move.FormationV.AgentsPerLine"/> is ignored. Otherwise, the formation is build in 3D. Note that the last layer may
+            be sparse if the number of available agents does not match the total number of agents defined by
             <see cref="P:Polarith.AI.Move.FormationV.AgentsPerLine"/>.
             </summary>
         </member>
@@ -505,7 +509,7 @@
         </member>
         <member name="P:Polarith.AI.Move.FormationV.AgentsPerLine">
             <summary>
-            Number of neighboring agents along x-axis (thickness) and y-axis (height) of the V-shape.
+            Number of neighboring agents in width and height of the V-shape.
             </summary>
         </member>
         <member name="P:Polarith.AI.Move.FormationV.Solid">
@@ -520,7 +524,7 @@
         </member>
         <member name="P:Polarith.AI.Move.FormationV.UpVector">
             <summary>
-            Axis-aligned up Vector of the agent according to the attached <see cref="T:Polarith.AI.Move.AIMSensor"/>. Note that the
+            Axis-aligned up vector of the agent according to the attached <see cref="T:Polarith.AI.Move.AIMSensor"/>. Note that the
             up vector becomes the forward vector if used with <see cref="F:Polarith.AI.Move.FormationV.ShapeType.NonPlanar"/>.
             </summary>
         </member>
@@ -531,12 +535,11 @@
         </member>
         <member name="M:Polarith.AI.Move.FormationV.ComputePosition">
             <summary>
-            Overwritten method to build up a <see cref="T:Polarith.AI.Move.FormationV"/>, i.e. placing agents as a V, by computing
+            Overwritten method to build up a <see cref="T:Polarith.AI.Move.FormationV"/>, i.e., placing agents as a V, by computing
             the <see cref="P:Polarith.AI.Move.AIMFormation.TargetPosition"/> of each agent. Units are placed equidistantly on lines with
-            <see cref="!:AIMFormationV.UnitsPerLinewidth"/> and <see cref="!:AIMFormationV.UnitsPerLineHeight"/> as
-            thickness of the V-shape, and <see cref="P:Polarith.AI.Move.Formation.Spacing"/> as distance between them. The last layer may 
-            be sparse since there are probably not enough units. This method computes only the position of a single 
-            agent with respect to the whole formation.
+            <see cref="P:Polarith.AI.Move.FormationV.AgentsPerLine"/> as thickness of the V-shape, and <see cref="!:Spacing"/> as distance
+            between them. The last layer may be sparse since there are probably not enough units. This method computes
+            only the position of a single agent with respect to the whole formation.
             </summary>
         </member>
         <member name="T:Polarith.AI.Move.AIMFormation">
@@ -571,7 +574,7 @@
         </member>
         <member name="P:Polarith.AI.Move.AIMFormation.Formation">
             <summary>
-            Polymorphic reference to the underlying back-end class (read only).
+            Polymorphic reference to the underlying back-end class <see cref="T:Polarith.AI.Move.Formation"/> (read only).
             <para/>
             Needs to be implemented by derived components.
             </summary>
@@ -586,23 +589,23 @@
         <member name="T:Polarith.AI.Move.AIMFormationArrow">
             <summary>
             <see cref="T:Polarith.AI.Move.AIMFormationArrow"/> computes an agent's position based on its order inside an arrow-shaped formation 
-            and the reference position or object of the formation.
+            and the reference position or -object of the formation.
             Front-end component of the underlying <see cref="T:Polarith.AI.Move.FormationArrow"/> class.
             </summary>
         </member>
         <member name="P:Polarith.AI.Move.AIMFormationArrow.SteeringBehaviour">
             <summary>
-            Polymorphic reference to the underlying back-end class <see cref="P:Polarith.AI.Move.AIMFormationArrow.SteeringBehaviour"/> (read only).
+            Polymorphic reference to the underlying back-end class <see cref="T:Polarith.AI.Move.SteeringBehaviour"/> (read only).
             </summary>
         </member>
         <member name="P:Polarith.AI.Move.AIMFormationArrow.Formation">
             <summary>
-            Polymorphic reference to the underlying back-end class <see cref="P:Polarith.AI.Move.AIMFormationArrow.Formation"/> (read only).
+            Polymorphic reference to the underlying back-end class <see cref="T:Polarith.AI.Move.Formation"/> (read only).
             </summary>
         </member>
         <member name="P:Polarith.AI.Move.AIMFormationArrow.FormationArrow">
             <summary>
-            Reference to the underlying back-end class (read only).
+            Reference to the underlying back-end class <see cref="T:Polarith.AI.Move.FormationArrow"/> (read only).
             </summary>
         </member>
         <member name="M:Polarith.AI.Move.AIMFormationArrow.OnDrawGizmos">
@@ -613,23 +616,23 @@
         <member name="T:Polarith.AI.Move.AIMFormationBox">
             <summary>
             <see cref="T:Polarith.AI.Move.AIMFormationBox"/> computes an agent's position based on its order inside a box-shaped formation and 
-            the reference position or object of the formation.
+            the reference position or -object of the formation.
             Front-end component of the underlying <see cref="T:Polarith.AI.Move.FormationBox"/> class.
             </summary>
         </member>
         <member name="P:Polarith.AI.Move.AIMFormationBox.SteeringBehaviour">
             <summary>
-            Polymorphic reference to the underlying back-end class <see cref="P:Polarith.AI.Move.AIMFormationBox.SteeringBehaviour"/> (read only).
+            Polymorphic reference to the underlying back-end class <see cref="T:Polarith.AI.Move.SteeringBehaviour"/> (read only).
             </summary>
         </member>
         <member name="P:Polarith.AI.Move.AIMFormationBox.Formation">
             <summary>
-            Polymorphic reference to the underlying back-end class <see cref="P:Polarith.AI.Move.AIMFormationBox.Formation"/> (read only).
+            Polymorphic reference to the underlying back-end class <see cref="T:Polarith.AI.Move.Formation"/> (read only).
             </summary>
         </member>
         <member name="P:Polarith.AI.Move.AIMFormationBox.FormationBox">
             <summary>
-            Reference to the underlying back-end class (read only).
+            Reference to the underlying back-end class <see cref="T:Polarith.AI.Move.FormationBox"/> (read only).
             </summary>
         </member>
         <member name="M:Polarith.AI.Move.AIMFormationBox.OnDrawGizmos">
@@ -640,23 +643,23 @@
         <member name="T:Polarith.AI.Move.AIMFormationCircle">
             <summary>
             <see cref="T:Polarith.AI.Move.AIMFormationCircle"/> computes an agent's position based on its order inside a circle-shaped 
-            formation and the reference position or object of the formation.
+            formation and the reference position or -object of the formation.
             Front-end component of the underlying <see cref="T:Polarith.AI.Move.FormationCircle"/> class.
             </summary>
         </member>
         <member name="P:Polarith.AI.Move.AIMFormationCircle.SteeringBehaviour">
             <summary>
-            Polymorphic reference to the underlying back-end class <see cref="P:Polarith.AI.Move.AIMFormationCircle.SteeringBehaviour"/> (read only).
+            Polymorphic reference to the underlying back-end class <see cref="T:Polarith.AI.Move.SteeringBehaviour"/> (read only).
             </summary>
         </member>
         <member name="P:Polarith.AI.Move.AIMFormationCircle.Formation">
             <summary>
-            Polymorphic reference to the underlying back-end class <see cref="P:Polarith.AI.Move.AIMFormationCircle.Formation"/> (read only).
+            Polymorphic reference to the underlying back-end class <see cref="T:Polarith.AI.Move.Formation"/> (read only).
             </summary>
         </member>
         <member name="P:Polarith.AI.Move.AIMFormationCircle.FormationCircle">
             <summary>
-            Reference to the underlying back-end class (read only).
+            Reference to the underlying back-end class <see cref="T:Polarith.AI.Move.FormationCircle"/> (read only).
             </summary>
         </member>
         <member name="M:Polarith.AI.Move.AIMFormationCircle.OnDrawGizmos">
@@ -667,14 +670,14 @@
         <member name="T:Polarith.AI.Move.AIMFormationConfiguration">
             <summary>
             Assigns the agents to their position inside the formation. Also calls the low-level logic to compute the
-            agents position inside the formation. Optionally, the agents are gathered from the child objects automatically.
+            agents' position inside the formation. Optionally, the agents are gathered from the child objects automatically.
             </summary>
             <remarks>
-            You may want to provide your own assignment logic. Therefore you need to inherit <see
-            cref="T:Polarith.AI.Move.AIMFormationConfiguration"/> and provide an <see cref="!:Assignment(List&lt;GameObject&gt;, int)"/> method. You
-            should make yourself familiar with the so called <a
-            href="https://en.wikipedia.org/wiki/Assignment_problem">assignment problem</a>. Our simple assignment function
-            is just a serialized greedy algorithm, the complex function implements the so called
+            You may want to provide your own assignment logic. Therefore, you need to inherit from <see
+            cref="T:Polarith.AI.Move.AIMFormationConfiguration"/>, and provide an <see cref="!:Assignment(List&lt;GameObject&gt;, int)"/> method. You
+            should make yourself familiar with the so called 
+            <a href="https://en.wikipedia.org/wiki/Assignment_problem">assignment problem</a>. Our simple assignment 
+            function is a serialized greedy algorithm, the complex function implements the so-called
             <a href="https://en.wikipedia.org/wiki/Hungarian_algorithm">Hungarian Method</a>.
             </remarks>
         </member>
@@ -683,15 +686,16 @@
             <see cref="T:Polarith.AI.Move.AIMFollow"/> behaviours of the agents.
             </summary>
         </member>
-        <member name="P:Polarith.AI.Move.AIMFormationConfiguration.SetOnStart">
+        <member name="P:Polarith.AI.Move.AIMFormationConfiguration.AssignOnStart">
             <summary>
-            Toggle whether the assignment should be performed on start.
+            Toggle if the assignment should be performed on start.
             </summary>
         </member>
         <member name="P:Polarith.AI.Move.AIMFormationConfiguration.AutoObtainChildren">
             <summary>
-            Toggle if agents should be assigned automatically to the <see cref="P:Polarith.AI.Move.AIMFormationConfiguration.Agents"/> list.
-            Agents need to be children of this GameObject with <see cref="T:Polarith.AI.Move.AIMFormationConfiguration"/>.
+            Toggle if agents should be assigned automatically to the agents list. Agents need to be children of 
+            the Game Object with <see cref="T:Polarith.AI.Move.AIMFormationConfiguration"/>. Children are searched recursively for the 
+            first occurance of <see cref="T:Polarith.AI.Move.AIMFormation"/>.
             </summary>
         </member>
         <member name="P:Polarith.AI.Move.AIMFormationConfiguration.AssignComplexity">
@@ -705,8 +709,8 @@
         </member>
         <member name="P:Polarith.AI.Move.AIMFormationConfiguration.AutoObtainSize">
             <summary>
-            Toggle if the maximum number of agents in the formation should be adjusted to the actual number
-            of agents automatically. The actual number is based on the children of the GameObject with
+            Toggle if the maximum number of agents in the formation should be adjusted to the actual 
+            number of agents automatically. The actual number is based on the direct children of this GameObject with 
             <see cref="T:Polarith.AI.Move.AIMFormationConfiguration"/>. Note that only agents from the formation should be children.
             </summary>
         </member>
@@ -720,50 +724,49 @@
             </param>
             <remarks>
             We provide a simple and a complex assignment function. The simple version is fast, but non-optimal, meaning
-            your agents will probably travel larger (non-optimal) distances to reach their assigned positions and will
+            your agents will probably travel larger (non-optimal) distances to reach their assigned positions, and will
             intersect with other agents. The complex version is optimal, but slow. This results in short distances for
             your agents, but with high computational effort. Remember to call this method only ONCE if you update
-            the <see cref="P:Polarith.AI.Move.Formation.Size"/> or list of assigned <see cref="P:Polarith.AI.Move.AIMFormationConfiguration.Agents"/> manually.
+            the <see cref="P:Polarith.AI.Move.Formation.Size"/> or the list of assigned <see cref="P:Polarith.AI.Move.AIMFormationConfiguration.Agents"/> manually.
             </remarks>
         </member>
         <member name="M:Polarith.AI.Move.AIMFormationConfiguration.UpdateConfig">
             <summary>
-            Updates the list of <see cref="P:Polarith.AI.Move.AIMFormationConfiguration.Agents"/> if <see cref="P:Polarith.AI.Move.AIMFormationConfiguration.AutoObtainChildren"/> is enabled and recomputes their
-            assignments.
+            Updates the list of <see cref="P:Polarith.AI.Move.AIMFormationConfiguration.Agents"/> if <see cref="P:Polarith.AI.Move.AIMFormationConfiguration.AutoObtainChildren"/> is enabled, updates the 
+            <see cref="P:Polarith.AI.Move.Formation.Size"/> if <see cref="P:Polarith.AI.Move.AIMFormationConfiguration.AutoObtainSize"/> is enabled, and recomputes the assignments.
             </summary>
             <remarks>
             Remember to call this method only ONCE if you update any parameter of the assigned agents that affect the
-            representation of the formation (e.g., iterate over assigned agents, change
+            representation of the formation (e.g., iterate over the assigned agents, change
             <see cref="!:FormationBox.UnitsPerLineWidth"/>, and call this method afterwards once).
             </remarks>
         </member>
         <member name="M:Polarith.AI.Move.AIMFormationConfiguration.AutoObtainAgents">
             <summary>
-            Looks for <see cref="T:Polarith.AI.Move.AIMFormation"/> instances in the child objects and adds them to the 
-            <see cref="P:Polarith.AI.Move.AIMFormationConfiguration.Agents"/> list, which is adjusted accordingly. Additionally, the agents are assigned to a 
-            position inside the formation.
+            Looks for <see cref="T:Polarith.AI.Move.AIMFormation"/> instances in the child objects recursively, and adds them to the 
+            <see cref="P:Polarith.AI.Move.AIMFormationConfiguration.Agents"/> list.
             </summary>
         </member>
         <member name="T:Polarith.AI.Move.AIMFormationCross">
             <summary>
             <see cref="T:Polarith.AI.Move.AIMFormationCross"/> computes an agent's position based on its order inside a cross-shaped 
-            formation and the reference position or object of the formation.
+            formation and the reference position or -object of the formation.
             Front-end component of the underlying <see cref="T:Polarith.AI.Move.FormationCross"/> class.
             </summary>
         </member>
         <member name="P:Polarith.AI.Move.AIMFormationCross.SteeringBehaviour">
             <summary>
-            Polymorphic reference to the underlying back-end class <see cref="P:Polarith.AI.Move.AIMFormationCross.SteeringBehaviour"/> (read only).
+            Polymorphic reference to the underlying back-end class <see cref="T:Polarith.AI.Move.SteeringBehaviour"/> (read only).
             </summary>
         </member>
         <member name="P:Polarith.AI.Move.AIMFormationCross.Formation">
             <summary>
-            Polymorphic reference to the underlying back-end class <see cref="P:Polarith.AI.Move.AIMFormationCross.Formation"/> (read only).
+            Polymorphic reference to the underlying back-end class <see cref="T:Polarith.AI.Move.Formation"/> (read only).
             </summary>
         </member>
         <member name="P:Polarith.AI.Move.AIMFormationCross.FormationCross">
             <summary>
-            Reference to the underlying back-end class (read only).
+            Reference to the underlying back-end class <see cref="T:Polarith.AI.Move.FormationCross"/> (read only).
             </summary>
         </member>
         <member name="M:Polarith.AI.Move.AIMFormationCross.OnDrawGizmos">
@@ -774,23 +777,23 @@
         <member name="T:Polarith.AI.Move.AIMFormationLine">
             <summary>
             <see cref="T:Polarith.AI.Move.AIMFormationLine"/> computes an agent's position based on its order inside a line-shaped 
-            formation and the reference position or object of the formation.
+            formation and the reference position or -object of the formation.
             Front-end component of the underlying <see cref="T:Polarith.AI.Move.FormationLine"/> class.
             </summary>
         </member>
         <member name="P:Polarith.AI.Move.AIMFormationLine.SteeringBehaviour">
             <summary>
-            Polymorphic reference to the underlying back-end class <see cref="P:Polarith.AI.Move.AIMFormationLine.SteeringBehaviour"/> (read only).
+            Polymorphic reference to the underlying back-end class <see cref="T:Polarith.AI.Move.SteeringBehaviour"/> (read only).
             </summary>
         </member>
         <member name="P:Polarith.AI.Move.AIMFormationLine.Formation">
             <summary>
-            Polymorphic reference to the underlying back-end class <see cref="P:Polarith.AI.Move.AIMFormationLine.Formation"/> (read only).
+            Polymorphic reference to the underlying back-end class <see cref="T:Polarith.AI.Move.Formation"/> (read only).
             </summary>
         </member>
         <member name="P:Polarith.AI.Move.AIMFormationLine.FormationLine">
             <summary>
-            Reference to the underlying back-end class (read only).
+            Reference to the underlying back-end class <see cref="T:Polarith.AI.Move.FormationLine"/> (read only).
             </summary>
         </member>
         <member name="M:Polarith.AI.Move.AIMFormationLine.OnDrawGizmos">
@@ -801,23 +804,23 @@
         <member name="T:Polarith.AI.Move.AIMFormationV">
             <summary>
             <see cref="T:Polarith.AI.Move.AIMFormationV"/> computes an agent's position based on its order inside a V-shaped 
-            formation and the reference position or object of the formation.
+            formation and the reference position or -object of the formation.
             Front-end component of the underlying <see cref="T:Polarith.AI.Move.FormationV"/> class.
             </summary>
         </member>
         <member name="P:Polarith.AI.Move.AIMFormationV.SteeringBehaviour">
             <summary>
-            Polymorphic reference to the underlying back-end class <see cref="P:Polarith.AI.Move.AIMFormationV.SteeringBehaviour"/> (read only).
+            Polymorphic reference to the underlying back-end class <see cref="T:Polarith.AI.Move.SteeringBehaviour"/> (read only).
             </summary>
         </member>
         <member name="P:Polarith.AI.Move.AIMFormationV.Formation">
             <summary>
-            Polymorphic reference to the underlying back-end class <see cref="P:Polarith.AI.Move.AIMFormationV.Formation"/> (read only).
+            Polymorphic reference to the underlying back-end class <see cref="T:Polarith.AI.Move.Formation"/> (read only).
             </summary>
         </member>
         <member name="P:Polarith.AI.Move.AIMFormationV.FormationV">
             <summary>
-            Reference to the underlying back-end class (read only).
+            Reference to the underlying back-end class <see cref="T:Polarith.AI.Move.Formation"/> (read only).
             </summary>
         </member>
         <member name="M:Polarith.AI.Move.AIMFormationV.OnDrawGizmos">
