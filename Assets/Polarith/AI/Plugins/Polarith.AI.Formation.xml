@@ -555,6 +555,36 @@
              Front-end component of all underlying <see cref="P:Polarith.AI.Move.AIMFormation.Formation"/> classes.
              </summary>
         </member>
+        <member name="F:Polarith.AI.Move.AIMFormation.innerRadiusGizmo">
+            <summary>
+            Sets up the visualization of the inner radius (editor only).
+            </summary>
+        </member>
+        <member name="F:Polarith.AI.Move.AIMFormation.outerRadiusGizmo">
+            <summary>
+            Sets up the visualization of the outer radius (editor only).
+            </summary>
+        </member>
+        <member name="F:Polarith.AI.Move.AIMFormation.arriveRadiusGizmo">
+            <summary>
+            Sets up the visualization of the arrive radius (editor only).
+            </summary>
+        </member>
+        <member name="F:Polarith.AI.Move.AIMFormation.innerCircleGizmo">
+            <summary>
+            Sets up the visualization of the inner radius for planar sensor shapes (editor only).
+            </summary>
+        </member>
+        <member name="F:Polarith.AI.Move.AIMFormation.outerCircleGizmo">
+            <summary>
+            Sets up the visualization of the outer radius for planar sensor shapes (editor only).
+            </summary>
+        </member>
+        <member name="F:Polarith.AI.Move.AIMFormation.arriveCircleGizmo">
+            <summary>
+            Sets up the visualization of the arrive radius for planar sensor shapes (editor only).
+            </summary>
+        </member>
         <member name="P:Polarith.AI.Move.AIMFormation.TargetObject">
             <summary>
             The target game object used by the agent as reference for the formation.

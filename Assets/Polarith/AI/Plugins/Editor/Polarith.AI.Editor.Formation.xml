@@ -32,5 +32,11 @@
             each overridden version of these methods.
             </summary>
         </member>
+        <member name="M:Polarith.AI.MoveEditor.AIMFormationEditor.DrawGizmoInspector">
+            <summary>
+            Displays the gizmo settings for the <see cref="P:Polarith.AI.Move.Formation.OuterCatchUpRadius"/>, <see
+            cref="P:Polarith.AI.Move.Formation.InnerCatchUpRadius"/>, and <see cref="P:Polarith.AI.Move.Formation.ArriveRadius"/>.
+            </summary>
+        </member>
     </members>
 </doc>
