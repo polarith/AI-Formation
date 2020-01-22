@@ -728,6 +728,14 @@
             first occurance of <see cref="T:Polarith.AI.Move.AIMFormation"/>.
             </summary>
         </member>
+        <member name="P:Polarith.AI.Move.AIMFormationConfiguration.AutoObtainSize">
+            <summary>
+            Toggle if the maximum number of agents in the formation should be adjusted to the actual 
+            number of agents automatically. The actual number is based on the direct children of this GameObject with 
+            <see cref="T:Polarith.AI.Move.AIMFormationConfiguration"/>. Note that only agents from the formation should be children.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:Polarith.AI.Move.AIMFormationConfiguration.ForeignObtainment" -->
         <member name="P:Polarith.AI.Move.AIMFormationConfiguration.AssignComplexity">
             <summary>
             You can select the complexity of the assignment algorithm. You do
@@ -735,13 +743,6 @@
             optimal algorithm. The smaller the value, the more assignments are done with the simple algorithm and vice
             versa. We recommend the complex algorithm up to ~64 units at once, but feel free to try the impact on your
             scene.
-            </summary>
-        </member>
-        <member name="P:Polarith.AI.Move.AIMFormationConfiguration.AutoObtainSize">
-            <summary>
-            Toggle if the maximum number of agents in the formation should be adjusted to the actual 
-            number of agents automatically. The actual number is based on the direct children of this GameObject with 
-            <see cref="T:Polarith.AI.Move.AIMFormationConfiguration"/>. Note that only agents from the formation should be children.
             </summary>
         </member>
         <member name="M:Polarith.AI.Move.AIMFormationConfiguration.Assignment(System.Int32)">
