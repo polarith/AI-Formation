@@ -18,6 +18,12 @@ namespace Polarith.AI.Package
         [Tooltip("New target GameObject of the FormationSetup.")]
         public GameObject NewTargetObject;
 
+        /// <summary>
+        /// Toggle if the agents of the formation that enters the trigger should be re-assigned.
+        /// </summary>
+        [Tooltip("Toggle if the agents of the formation that enters the trigger should be re-assigned.")]
+        public bool ReAssign = true;
+
         #endregion // Fields
 
         #region Methods ================================================================================================
