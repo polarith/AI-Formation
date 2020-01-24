@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using Polarith.AI.Move;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Polarith.AI.Package
 {
@@ -24,6 +26,12 @@ namespace Polarith.AI.Package
         [Tooltip("Toggle if the agents of the formation that enters the trigger should be re-assigned.")]
         public bool ReAssign = true;
 
+        /// <summary>
+        /// List of additional configurations that should be triggered to update.
+        /// </summary>
+        [Tooltip("List of additional configurations that should be triggered to update.")]
+        public List<AIMFormationConfiguration> AdditionalConfigs = new List<AIMFormationConfiguration>();
+
         #endregion // Fields
 
         #region Methods ================================================================================================
@@ -37,9 +45,21 @@ namespace Polarith.AI.Package
 
         private void OnTriggerExit2D(Collider2D collision)
         {
+            StartCoroutine(WaitRoutine());
+
             AIMFormationConfiguration c = collision.transform.gameObject.GetComponent<AIMFormationConfiguration>();
             if (c != null)
-                c.UpdateConfig();                
+            {
+                c.UpdateConfig();
+                foreach (AIMFormationConfiguration config in AdditionalConfigs)
+                    config.UpdateConfig();
+            }
+                
+        }
+
+        IEnumerator WaitRoutine()
+        {
+            yield return new WaitForSeconds(0.1f);
         }
 
         #endregion // Methods
