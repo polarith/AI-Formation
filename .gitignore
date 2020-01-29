@@ -58,3 +58,8 @@ Assets/Polarith/AI/Plugins/Polarith.AI.dll.meta
 Assets/Polarith/AI/Plugins/Polarith.AI.dll
 Assets/Polarith/AI/Plugins/Editor/Polarith.AI.Editor.dll.meta
 Assets/Polarith/AI/Plugins/Editor/Polarith.AI.Editor.dll
+Assets/Polarith/AI/Plugins/Shaders.meta
+Assets/Polarith/AI/Plugins/Shaders/Splat.shader
+Assets/Polarith/AI/Plugins/Shaders/Extrude.shader.meta
+Assets/Polarith/AI/Plugins/Shaders/Extrude.shader
+Assets/Polarith/AI/Plugins/Shaders/Splat.shader.meta
