@@ -26,23 +26,69 @@
         </member>
         <member name="T:Polarith.Utils.TupleInt">
             <summary>
-            Struct to store two variables (X,Y) of type integer.
+            Serializable struct to store two variables (X,Y) of type integer. The serialization is necessary for custom 
+            editors.
             </summary>
         </member>
         <member name="F:Polarith.Utils.TupleInt.X">
             <summary>
-            First value.
+            First integer value.
             </summary>
         </member>
         <member name="F:Polarith.Utils.TupleInt.Y">
             <summary>
-            Second value.
+            Second integer value.
             </summary>
         </member>
         <member name="M:Polarith.Utils.TupleInt.#ctor(System.Int32,System.Int32)">
             <summary>
-            Contructor that takes two integer values.
+            Contructor that takes two arguments of type integer.
             </summary>
+        </member>
+        <member name="T:Polarith.UnityUtils.AssignmentSolver">
+            <summary>
+            Provides different logics to solve the <a href="https://en.wikipedia.org/wiki/Assignment_problem">assignment
+            problem</a>.
+            </summary>
+        </member>
+        <member name="M:Polarith.UnityUtils.AssignmentSolver.FindGreedy(System.Collections.Generic.List{Polarith.AI.Move.AIMFormation},System.Collections.Generic.List{UnityEngine.Vector3},System.Int32)">
+            <summary>
+            Finds assignments for a list of agents and target positions in a greedy manner. The optimization looks
+            iteratively for the best available assignment to the current agent.
+            </summary>
+            <param name="agents">
+            A list of the agents <see cref="T:Polarith.AI.Move.AIMFormation"/> that should be assigned to positions inside the formation.
+            </param>
+            <param name="targetPositions">
+            A list of <see cref="T:UnityEngine.Vector3"/> positions inside the formation that are available to the agents.
+            </param>
+            <param name="maxTargets">
+            Determines the maximum number of available targets. Note that this must be less or equal to the real number
+            of available targets to split computation into a greedy and an optimal part.
+            </param>
+            <returns>
+            An array of assignments; element <em>i</em> is the index of the assigned position from the targets list for
+            the agent on position <em>i</em> of the agents list.
+            </returns>
+        </member>
+        <member name="M:Polarith.UnityUtils.AssignmentSolver.FindOptimal(System.Int32[0:,0:])">
+            <summary>
+            Finds optimal assignments for a matrix of agents and costed tasks. The optimization looks for the best
+            assignment of the first index from the input data using the
+            <a href="https://en.wikipedia.org/wiki/Hungarian_algorithm">Hungarian Method</a>.
+            </summary>
+            <remarks>
+            Note that the column/row model for agents and tasks is just a mental model. It depends on your input data,
+            whether the first index or the second index represents the agent or the task. However, we will optimize for
+            the first index.
+            </remarks>
+            <param name="costs">
+            A cost matrix; each row contains elements that represent the associated costs of each task for the agent.
+            </param>
+            <returns>
+            An array of assignments; element <em>i</em> is the index of the assigned task/position (column) for an agent
+            (row).
+            </returns>
         </member>
         <member name="T:Polarith.UnityUtils.ArrowGizmo">
             <summary>
@@ -139,8 +185,8 @@
             Used as constraint version of <see cref="T:Polarith.AI.Move.MappingType"/> to avoid inverse mapping. Cast this type to 
             <see cref="T:Polarith.AI.Move.MappingType"/> to use within the 
             <see cref="M:Polarith.AI.Move.MoveBehaviour.MapSpecialSqr(Polarith.AI.Move.MappingType,System.Single,System.Single,System.Single)"/> and <see
-            cref="M:Polarith.AI.Move.MoveBehaviour.MapSpecial(Polarith.AI.Move.MappingType,System.Single,System.Single,System.Single)"/> methods in order to specify the desired type
-            of the applied mapping function.
+            cref="M:Polarith.AI.Move.MoveBehaviour.MapSpecial(Polarith.AI.Move.MappingType,System.Single,System.Single,System.Single)"/> methods in order to specify the desired 
+            type of the applied mapping function.
             </summary>
         </member>
         <member name="F:Polarith.AI.Move.NonInverseMappingType.Constant">
@@ -171,24 +217,84 @@
              <see cref="T:Polarith.AI.Move.Formation"/> computes the position of a single agent as part of a formation, i.e., it's 
              decentralized. The position of a single agent is primarily based on the <see cref="P:Polarith.AI.Move.Formation.Size"/> of the 
              whole formation, the <see cref="P:Polarith.AI.Move.Formation.PositionInFormation"/> as its place inside the formation, and the
-             <see cref="P:Polarith.AI.Move.Formation.Spacing"/> as horizontal and vertical distance between the agents.
+             <see cref="P:Polarith.AI.Move.Formation.Spacing"/> as horizontal and vertical distance between the agents. <br/>
              <see cref="P:Polarith.AI.Move.AIMFormation.TargetObject"/>, <see cref="P:Polarith.AI.Move.AIMFormation.TargetPosition"/>, or
-             <see cref="P:Polarith.AI.Move.AIMFormation.TargetTag"/> may be considered in <see cref="M:Polarith.AI.Move.Formation.ComputePosition"/> in derived
+             <see cref="P:Polarith.AI.Move.AIMFormation.TargetTag"/> may be considered in <see cref="M:Polarith.AI.Move.Formation.ComputePosition"/>() in derived
              classes to move the formation to a specific position or to follow an object that deals as target agent for the
-             whole formation.
+             whole formation.<br/>
              The agents' computed target position results in <see cref="F:Polarith.AI.Move.SteeringBehaviour.ResultDirection"/> as a vector from
              its current position towards its target position. The <see cref="F:Polarith.AI.Move.SteeringBehaviour.ResultMagnitude"/> is based
-             on the <see cref="P:Polarith.AI.Move.Formation.DistanceMapping"/>. Note that the mapping can't be inverse.
+             on the <see cref="P:Polarith.AI.Move.Formation.DistanceMapping"/>. Note that the mapping can't be inverse.<br/>
              The agent may slow down near its target position within the <see cref="P:Polarith.AI.Move.Formation.ArriveRadius"/>, or accelerate
              between the <see cref="P:Polarith.AI.Move.Formation.InnerCatchUpRadius"/> and the <see cref="P:Polarith.AI.Move.Formation.OuterCatchUpRadius"/> to
              move a faster than its neighboring agents. Thus, it's able to keep up to its target position even if the
              formation rotates. The acceleration is scalable with <see cref="P:Polarith.AI.Move.Formation.CatchUpMultiplier"/>.
             
-             Every derived <see cref="T:Polarith.AI.Move.Formation"/> needs to implement <see cref="M:Polarith.AI.Move.Formation.ComputePosition"/> to set the
+             Every derived <see cref="T:Polarith.AI.Move.Formation"/> needs to implement <see cref="M:Polarith.AI.Move.Formation.ComputePosition"/>() to set the
              exact position based on the specific formation shape.
             
              Base back-end behaviour of every derived <see cref="T:Polarith.AI.Move.AIMFormation"/>
              </summary>
+        </member>
+        <member name="F:Polarith.AI.Move.Formation.size">
+            <summary>
+            Maximum number of agents in the formation.
+            </summary>
+        </member>
+        <member name="F:Polarith.AI.Move.Formation.positionInFormation">
+            <summary>
+            Logical position of the agent in the formation, e.g. (1/10), where 10 is the <see cref="P:Polarith.AI.Move.Formation.Size"/>.
+            Note that the logical position is zero-based, so the corresponding positions would be in a range from 0 - 9.
+            </summary>
+        </member>
+        <member name="F:Polarith.AI.Move.Formation.spacing">
+            <summary>
+            Distance between each agent in the formation.
+            </summary>
+        </member>
+        <member name="F:Polarith.AI.Move.Formation.arriveRadius">
+            <summary>
+            Radius within the agent slows down to arrive the target position. Magnitude is between 0 and 1;
+            </summary>
+        </member>
+        <member name="F:Polarith.AI.Move.Formation.innerCatchUpRadius">
+            <summary>
+            Inner radius within the agent keeps its to keep next to the target position. This
+            radius must be greater or equal to the <see cref="P:Polarith.AI.Move.Formation.ArriveRadius"/>, but smaller than the
+            <see cref="P:Polarith.AI.Move.Formation.OuterCatchUpRadius"/>. This is necessary if the formation rotates, since the outer agents need 
+            to move a longer distance. The magnitude is constantly 1 between the <see cref="P:Polarith.AI.Move.Formation.ArriveRadius"/> and
+            the <see cref="P:Polarith.AI.Move.Formation.InnerCatchUpRadius"/>, or 1 + a value between 0 and 1, based on the distance to the
+            <see cref="P:Polarith.AI.Move.Formation.InnerCatchUpRadius"/> and <see cref="P:Polarith.AI.Move.Formation.OuterCatchUpRadius"/>, times the
+            <see cref="P:Polarith.AI.Move.Formation.CatchUpMultiplier"/>.
+            </summary>
+        </member>
+        <member name="F:Polarith.AI.Move.Formation.outerCatchUpRadius">
+            <summary>
+            Outer radius within the agent accelerates to keep next to the target position. This radius must be greater
+            or equal to the <see cref="P:Polarith.AI.Move.Formation.InnerCatchUpRadius"/>. This is necessary if the formation rotates, since the
+            outer agents need to move a longer distance. The magnitude is 1 + a value between 0 and 1, based on the
+            distance to the <see cref="P:Polarith.AI.Move.Formation.InnerCatchUpRadius"/> and <see cref="P:Polarith.AI.Move.Formation.OuterCatchUpRadius"/>, times the
+            <see cref="P:Polarith.AI.Move.Formation.CatchUpMultiplier"/>.
+            </summary>
+        </member>
+        <member name="F:Polarith.AI.Move.Formation.catchUpMultiplier">
+            <summary>
+            An additional multiplier to obtain values bigger than the standard magnitude. The standard magnitude is
+            equal to 1 and is used between the <see cref="P:Polarith.AI.Move.Formation.ArriveRadius"/> and the <see cref="P:Polarith.AI.Move.Formation.InnerCatchUpRadius"/> to
+            have a constant magnitude. The <see cref="P:Polarith.AI.Move.Formation.CatchUpMultiplier"/> is multiplied with a value between 0 and 1,
+            based on the distance to the <see cref="P:Polarith.AI.Move.Formation.InnerCatchUpRadius"/> and <see cref="P:Polarith.AI.Move.Formation.OuterCatchUpRadius"/>,
+            resulting in magnitudes between 1 + [0,1] * <see cref="P:Polarith.AI.Move.Formation.CatchUpMultiplier"/>.
+            </summary>
+        </member>
+        <member name="F:Polarith.AI.Move.Formation.distanceMapping">
+            <summary>
+            Specifies the mapping type of the distance from the agent to its target position.
+            </summary>
+        </member>
+        <member name="F:Polarith.AI.Move.Formation.layers">
+            <summary>
+            The number of layers to cover agents dynamically (grows in-depth).
+            </summary>
         </member>
         <member name="P:Polarith.AI.Move.Formation.Size">
             <summary>
@@ -247,7 +353,17 @@
         </member>
         <member name="P:Polarith.AI.Move.Formation.Layers">
             <summary>
-            The number of layers to cover agents dynamically (grows in depth).
+            The number of layers to cover agents dynamically (grows in-depth).
+            </summary>
+        </member>
+        <member name="P:Polarith.AI.Move.Formation.forEachPercept">
+            <summary>
+            Returns true since only percept steering is supported.
+            </summary>
+        </member>
+        <member name="P:Polarith.AI.Move.Formation.forEachReceptor">
+            <summary>
+            Returns false since only percept steering is supported.
             </summary>
         </member>
         <member name="M:Polarith.AI.Move.Formation.ComputePosition">
@@ -261,10 +377,16 @@
             update parameters that affect the agents position.
             </summary>
         </member>
+        <member name="M:Polarith.AI.Move.Formation.PerceptSteering">
+            <summary>
+            Processes the steering algorithm for each percept using the same data for each processed receptor. Also 
+            considers the radii of the catch up system for mapping the result.
+            </summary>
+        </member>
         <member name="M:Polarith.AI.Move.Formation.ChangeOrientation(UnityEngine.Vector3,UnityEngine.Vector3@)">
             <summary>
-            Flips a vector from xy-plane according to an up vector. Useful to transform a vector lying in the
-            xy-plane if the attached <see cref="T:Polarith.AI.Move.AIMPlanarSensor"/> is not in the xy-plane, e.g., xz-plane. Note that
+            Flips a vector from XY-plane according to an up vector. Useful to transform a vector lying in the
+            XZ-plane if the attached <see cref="T:Polarith.AI.Move.AIMPlanarSensor"/> is not in the XY-plane, e.g., XZ-plane. Note that
             <c>vec</c> is a reference, and thus, is changed inside the function.
             </summary>
             <param name="up">3d vector that is perpendicular to the target plane</param>
@@ -399,8 +521,7 @@
         </member>
         <member name="P:Polarith.AI.Move.FormationCircle.UpVector">
             <summary>
-            Axis-aligned up vector of the agent according to the attached <see cref="T:Polarith.AI.Move.AIMSensor"/>. Note that the
-            up vector becomes the forward vector if used with <see cref="!:ShapeType.NonPlanar"/>.
+            Axis-aligned up vector of the agent according to the attached <see cref="T:Polarith.AI.Move.AIMSensor"/>.
             </summary>
         </member>
         <member name="M:Polarith.AI.Move.FormationCircle.ComputePosition">
@@ -411,9 +532,6 @@
             sparse, since there are probably not enough units. This method computes only the position of a single agent
             with respect to the whole formation.
             </summary>
-            <param name="centerPos">
-            <see cref="T:UnityEngine.Vector3"/> as the center position of the <see cref="!:AIMBoxFormation"/>.
-            </param>
         </member>
         <member name="T:Polarith.AI.Move.FormationCross">
             <summary>
@@ -466,8 +584,7 @@
         </member>
         <member name="P:Polarith.AI.Move.FormationLine.UpVector">
             <summary>
-            Axis-aligned up vector of the agent according to the attached <see cref="T:Polarith.AI.Move.AIMSensor"/>. Note that the
-            up vector becomes the forward vector if used with <see cref="!:ShapeType.NonPlanar"/>.
+            Axis-aligned up vector of the agent according to the attached <see cref="T:Polarith.AI.Move.AIMSensor"/>.
             </summary>
         </member>
         <member name="M:Polarith.AI.Move.FormationLine.ComputePosition">
@@ -537,7 +654,7 @@
             <summary>
             Overwritten method to build up a <see cref="T:Polarith.AI.Move.FormationV"/>, i.e., placing agents as a V, by computing
             the <see cref="P:Polarith.AI.Move.AIMFormation.TargetPosition"/> of each agent. Units are placed equidistantly on lines with
-            <see cref="P:Polarith.AI.Move.FormationV.AgentsPerLine"/> as thickness of the V-shape, and <see cref="!:Spacing"/> as distance
+            <see cref="P:Polarith.AI.Move.FormationV.AgentsPerLine"/> as thickness of the V-shape, and <see cref="P:Polarith.AI.Move.Formation.Spacing"/> as distance
             between them. The last layer may be sparse since there are probably not enough units. This method computes
             only the position of a single agent with respect to the whole formation.
             </summary>
@@ -616,6 +733,11 @@
             cref="F:Polarith.AI.Move.AIMPerceptBehaviour`1.GameObjects"/>.
             </summary>
         </member>
+        <member name="M:Polarith.AI.Move.AIMFormation.OnDrawGizmos">
+            <summary>
+            Visualizes the core functions of a <see cref="P:Polarith.AI.Move.AIMFormation.Formation"/> such as the radii of the catch-up system.
+            </summary>
+        </member>
         <member name="T:Polarith.AI.Move.AIMFormationArrow">
             <summary>
             <see cref="T:Polarith.AI.Move.AIMFormationArrow"/> computes an agent's position based on its order inside an arrow-shaped formation 
@@ -636,6 +758,11 @@
         <member name="P:Polarith.AI.Move.AIMFormationArrow.FormationArrow">
             <summary>
             Reference to the underlying back-end class <see cref="T:Polarith.AI.Move.FormationArrow"/> (read only).
+            </summary>
+        </member>
+        <member name="P:Polarith.AI.Move.AIMFormationArrow.ThreadSafe">
+            <summary>
+            Determines whether the underlying back-end class is thread-safe (read only). Returns always <c>true</c>.
             </summary>
         </member>
         <member name="M:Polarith.AI.Move.AIMFormationArrow.OnDrawGizmos">
@@ -665,6 +792,11 @@
             Reference to the underlying back-end class <see cref="T:Polarith.AI.Move.FormationBox"/> (read only).
             </summary>
         </member>
+        <member name="P:Polarith.AI.Move.AIMFormationBox.ThreadSafe">
+            <summary>
+            Determines whether the underlying back-end class is thread-safe (read only). Returns always <c>true</c>.
+            </summary>
+        </member>
         <member name="M:Polarith.AI.Move.AIMFormationBox.OnDrawGizmos">
             <summary>
             Visualizes the boundary of the formation based on its size.
@@ -692,6 +824,11 @@
             Reference to the underlying back-end class <see cref="T:Polarith.AI.Move.FormationCircle"/> (read only).
             </summary>
         </member>
+        <member name="P:Polarith.AI.Move.AIMFormationCircle.ThreadSafe">
+            <summary>
+            Determines whether the underlying back-end class is thread-safe (read only). Returns always <c>true</c>.
+            </summary>
+        </member>
         <member name="M:Polarith.AI.Move.AIMFormationCircle.OnDrawGizmos">
             <summary>
             Visualizes the boundary of the formation based on its size.
@@ -704,12 +841,59 @@
             </summary>
             <remarks>
             You may want to provide your own assignment logic. Therefore, you need to inherit from <see
-            cref="T:Polarith.AI.Move.AIMFormationConfiguration"/>, and provide an <see cref="!:Assignment(List&lt;GameObject&gt;, int)"/> method. You
-            should make yourself familiar with the so called 
+            cref="T:Polarith.AI.Move.AIMFormationConfiguration"/>, and provide an assignment method that as in 
+            <see cref="T:Polarith.UnityUtils.AssignmentSolver"/>. You should make yourself familiar with the so called 
             <a href="https://en.wikipedia.org/wiki/Assignment_problem">assignment problem</a>. Our simple assignment 
-            function is a serialized greedy algorithm, the complex function implements the so-called
+            method <see cref="M:Polarith.UnityUtils.AssignmentSolver.FindGreedy(System.Collections.Generic.List{Polarith.AI.Move.AIMFormation},System.Collections.Generic.List{UnityEngine.Vector3},System.Int32)"/> is 
+            a serialized greedy algorithm, the complex method 
+            <see cref="M:Polarith.UnityUtils.AssignmentSolver.FindOptimal(System.Int32[0:,0:])"/> implements the so-called 
             <a href="https://en.wikipedia.org/wiki/Hungarian_algorithm">Hungarian Method</a>.
             </remarks>
+        </member>
+        <member name="F:Polarith.AI.Move.AIMFormationConfiguration.agents">
+            <summary>
+            <see cref="T:Polarith.AI.Move.AIMFollow"/> behaviours of the agents.
+            </summary>
+        </member>
+        <member name="F:Polarith.AI.Move.AIMFormationConfiguration.assignOnStart">
+            <summary>
+            Toggle if the assignment should be performed on start.
+            </summary>
+        </member>
+        <member name="F:Polarith.AI.Move.AIMFormationConfiguration.autoObtainChildren">
+            <summary>
+            Toggle if agents should be assigned automatically to the agents list. Agents need to be children of 
+            the Game Object with <see cref="T:Polarith.AI.Move.AIMFormationConfiguration"/>. Children are searched recursively for the 
+            first occurrence of <see cref="T:Polarith.AI.Move.AIMFormation"/>.
+            </summary>
+        </member>
+        <member name="F:Polarith.AI.Move.AIMFormationConfiguration.autoObtainSize">
+            <summary>
+            Toggle if the maximum number of agents in the formation should be adjusted to the actual 
+            number of agents automatically. The actual number is based on the direct children of this GameObject with 
+            <see cref="T:Polarith.AI.Move.AIMFormationConfiguration"/>. Note that only agents from the formation should be children.
+            </summary>
+        </member>
+        <member name="F:Polarith.AI.Move.AIMFormationConfiguration.foreignObtainment">
+            <summary>
+            If a foreign game object is set, the auto options are applied on that game object. Thus, you are able to 
+            encapsulate AIMFormationConfiguration to another game object, e.g., to prevent the agents from obtaining 
+            transformations from the parent game object that contains the configuration.
+            </summary>
+        </member>
+        <member name="F:Polarith.AI.Move.AIMFormationConfiguration.assignComplexity">
+            <summary>
+            You can select the complexity of the assignment algorithm. You do
+            this by scaling the ratio between a simple and fast, but non-optimal algorithm or a complex and slow, but
+            optimal algorithm. The smaller the value, the more assignments are done with the simple algorithm and vice
+            versa. We recommend the complex algorithm up to ~64 units at once, but feel free to try the impact on your
+            scene.
+            </summary>
+        </member>
+        <member name="F:Polarith.AI.Move.AIMFormationConfiguration.targetPositions">
+            <summary>
+            List of the target positions obtained by the agents, i.e., the target positions in the formation.
+            </summary>
         </member>
         <member name="P:Polarith.AI.Move.AIMFormationConfiguration.Agents">
             <summary>
@@ -725,7 +909,7 @@
             <summary>
             Toggle if agents should be assigned automatically to the agents list. Agents need to be children of 
             the Game Object with <see cref="T:Polarith.AI.Move.AIMFormationConfiguration"/>. Children are searched recursively for the 
-            first occurance of <see cref="T:Polarith.AI.Move.AIMFormation"/>.
+            first occurrence of <see cref="T:Polarith.AI.Move.AIMFormation"/>.
             </summary>
         </member>
         <member name="P:Polarith.AI.Move.AIMFormationConfiguration.AutoObtainSize">
@@ -735,7 +919,13 @@
             <see cref="T:Polarith.AI.Move.AIMFormationConfiguration"/>. Note that only agents from the formation should be children.
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "P:Polarith.AI.Move.AIMFormationConfiguration.ForeignObtainment" -->
+        <member name="P:Polarith.AI.Move.AIMFormationConfiguration.ForeignObtainment">
+            <summary>
+            If a foreign game object is set, the auto options are applied on that game object. Thus, you are able to 
+            encapsulate AIMFormationConfiguration to another game object, e.g., to prevent the agents from obtaining 
+            transformations from the parent game object that contains the configuration.
+            </summary>
+        </member>
         <member name="P:Polarith.AI.Move.AIMFormationConfiguration.AssignComplexity">
             <summary>
             You can select the complexity of the assignment algorithm. You do
@@ -764,12 +954,13 @@
         <member name="M:Polarith.AI.Move.AIMFormationConfiguration.UpdateConfig">
             <summary>
             Updates the list of <see cref="P:Polarith.AI.Move.AIMFormationConfiguration.Agents"/> if <see cref="P:Polarith.AI.Move.AIMFormationConfiguration.AutoObtainChildren"/> is enabled, updates the 
-            <see cref="P:Polarith.AI.Move.Formation.Size"/> if <see cref="P:Polarith.AI.Move.AIMFormationConfiguration.AutoObtainSize"/> is enabled, and recomputes the assignments.
+            <see cref="P:Polarith.AI.Move.Formation.Size"/> if <see cref="P:Polarith.AI.Move.AIMFormationConfiguration.AutoObtainSize"/> is enabled, recomputes the assignments, and 
+            updates the behaviours of the agents with the new assignments.
             </summary>
             <remarks>
             Remember to call this method only ONCE if you update any parameter of the assigned agents that affect the
             representation of the formation (e.g., iterate over the assigned agents, change
-            <see cref="!:FormationBox.UnitsPerLineWidth"/>, and call this method afterwards once).
+            <see cref="P:Polarith.AI.Move.FormationBox.AgentsPerLine"/>, and call this method afterwards once).
             </remarks>
         </member>
         <member name="M:Polarith.AI.Move.AIMFormationConfiguration.AutoObtainAgents">
@@ -777,6 +968,20 @@
             Looks for <see cref="T:Polarith.AI.Move.AIMFormation"/> instances in the child objects recursively, and adds them to the 
             <see cref="P:Polarith.AI.Move.AIMFormationConfiguration.Agents"/> list.
             </summary>
+        </member>
+        <member name="M:Polarith.AI.Move.AIMFormationConfiguration.GetFormationSize">
+            <summary>
+             Get the number of agents that are child objects of the <see cref="T:Polarith.AI.Move.AIMFormationConfiguration"/>. 
+             You may want to override this method for a more complex logic.
+            </summary>
+            <returns>The number of children, i.e., transform.childCount.</returns>
+        </member>
+        <member name="M:Polarith.AI.Move.AIMFormationConfiguration.SetupBehaviours(System.Int32[])">
+            <summary>
+            Sets the target position in <see cref="T:Polarith.AI.Move.Formation"/> for each agent in <see cref="P:Polarith.AI.Move.AIMFormationConfiguration.Agents"/>.
+            </summary>
+            <param name="assigns">An array that contains the resulting logical position inside the formation for each 
+            agent. Thus, element <c>i</c> contains the position for agent <c>i</c> in <see cref="P:Polarith.AI.Move.AIMFormationConfiguration.Agents"/></param>
         </member>
         <member name="T:Polarith.AI.Move.AIMFormationCross">
             <summary>
@@ -798,6 +1003,11 @@
         <member name="P:Polarith.AI.Move.AIMFormationCross.FormationCross">
             <summary>
             Reference to the underlying back-end class <see cref="T:Polarith.AI.Move.FormationCross"/> (read only).
+            </summary>
+        </member>
+        <member name="P:Polarith.AI.Move.AIMFormationCross.ThreadSafe">
+            <summary>
+            Determines whether the underlying back-end class is thread-safe (read only). Returns always <c>true</c>.
             </summary>
         </member>
         <member name="M:Polarith.AI.Move.AIMFormationCross.OnDrawGizmos">
@@ -827,6 +1037,11 @@
             Reference to the underlying back-end class <see cref="T:Polarith.AI.Move.FormationLine"/> (read only).
             </summary>
         </member>
+        <member name="P:Polarith.AI.Move.AIMFormationLine.ThreadSafe">
+            <summary>
+            Determines whether the underlying back-end class is thread-safe (read only). Returns always <c>true</c>.
+            </summary>
+        </member>
         <member name="M:Polarith.AI.Move.AIMFormationLine.OnDrawGizmos">
             <summary>
             Visualizes the boundary of the formation based on its size.
@@ -854,55 +1069,15 @@
             Reference to the underlying back-end class <see cref="T:Polarith.AI.Move.Formation"/> (read only).
             </summary>
         </member>
+        <member name="P:Polarith.AI.Move.AIMFormationV.ThreadSafe">
+            <summary>
+            Determines whether the underlying back-end class is thread-safe (read only). Returns always <c>true</c>.
+            </summary>
+        </member>
         <member name="M:Polarith.AI.Move.AIMFormationV.OnDrawGizmos">
             <summary>
             Visualizes the boundary of the formation based on its size.
             </summary>
-        </member>
-        <member name="T:Polarith.AI.Move.AssignmentSolver">
-            <summary>
-            Provides different logics to solve the <a href="https://en.wikipedia.org/wiki/Assignment_problem">assignment
-            problem</a>.
-            </summary>
-        </member>
-        <member name="M:Polarith.AI.Move.AssignmentSolver.FindGreedy(System.Collections.Generic.List{Polarith.AI.Move.AIMFormation},System.Collections.Generic.List{UnityEngine.Vector3},System.Int32)">
-            <summary>
-            Finds assignments for a list of agents and target positions in a greedy manner. The optimization looks
-            iteratively for the best available assignment to the current agent.
-            </summary>
-            <param name="agents">
-            A list of the agents <see cref="T:Polarith.AI.Move.AIMFormation"/> that should be assigned to positions inside the formation.
-            </param>
-            <param name="targetPositions">
-            A list of <see cref="T:UnityEngine.Vector3"/> positions inside the formation that are available to the agents.
-            </param>
-            <param name="maxTargets">
-            Determines the maximum number of available targets. Note that this must be less or equal to the real number
-            of available targets to split computation into a greedy and an optimal part.
-            </param>
-            <returns>
-            An array of assignments; element <em>i</em> is the index of the assigned position from the targets list for
-            the agent on position <em>i</em> of the agents list.
-            </returns>
-        </member>
-        <member name="M:Polarith.AI.Move.AssignmentSolver.FindOptimal(System.Int32[0:,0:])">
-            <summary>
-            Finds optimal assignments for a matrix of agents and costed tasks. The optimization looks for the best
-            assignment of the first index from the input data using the
-            <a href="https://en.wikipedia.org/wiki/Hungarian_algorithm">Hungarian Method</a>.
-            </summary>
-            <remarks>
-            Note that the column/row model for agents and tasks is just a mental model. It depends on your input data,
-            whether the first index or the second index represents the agent or the task. However, we will optimize for
-            the first index.
-            </remarks>
-            <param name="costs">
-            A cost matrix; each row contains elements that represent the associated costs of each task for the agent.
-            </param>
-            <returns>
-            An array of assignments; element <em>i</em> is the index of the assigned task/position (column) for an agent
-            (row).
-            </returns>
         </member>
     </members>
 </doc>
