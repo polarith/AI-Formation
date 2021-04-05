@@ -81,6 +81,9 @@ namespace Polarith.UnityUtils
         /// Note that the column/row model for agents and tasks is just a mental model. It depends on your input data,
         /// whether the first index or the second index represents the agent or the task. However, we will optimize for
         /// the first index.
+        /// Original code provided in 2010 by 
+        /// <a href="https://web.archive.org/web/20121106104729/http://noldorin.com:80/programming/HungarianAlgorithm.cs">Alex Regueiro</a> 
+        /// under MIT License.
         /// </remarks>
         /// <param name="costs">
         /// A cost matrix; each row contains elements that represent the associated costs of each task for the agent.
