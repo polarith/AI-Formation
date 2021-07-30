@@ -1,6 +1,6 @@
 ﻿//
-// Copyright (c) 2016-2021 Polarith. All rights reserved.
-// Licensed under the Polarith Software and Source Code License Agreement.
+// MIT License
+// Copyright (c) 2021 Polarith.
 // See the LICENSE file in the project root for full license information.
 //
 
@@ -289,11 +289,11 @@ namespace Polarith.AI.Move
 
         //--------------------------------------------------------------------------------------------------------------
 
-            /// <summary>
-            ///  Get the number of active agents that are child objects of the <see cref="AIMFormationConfiguration"/>. 
-            ///  You may want to override this method for a more complex logic.
-            /// </summary>
-            /// <returns>The number of active children.</returns>
+        /// <summary>
+        ///  Get the number of active agents that are child objects of the <see cref="AIMFormationConfiguration"/>. 
+        ///  You may want to override this method for a more complex logic.
+        /// </summary>
+        /// <returns>The number of active children.</returns>
         protected virtual int GetFormationSize()
         {
             int count = 0;

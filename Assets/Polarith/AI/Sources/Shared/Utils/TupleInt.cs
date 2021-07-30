@@ -1,6 +1,6 @@
 ﻿//
-// Copyright (c) 2016-2021 Polarith. All rights reserved.
-// Licensed under the Polarith Software and Source Code License Agreement.
+// MIT License
+// Copyright (c) 2021 Polarith.
 // See the LICENSE file in the project root for full license information.
 //
 
@@ -29,7 +29,7 @@ namespace Polarith.Utils
         public int Y;
 
         /// <summary>
-        /// Contructor that takes two arguments of type integer.
+        /// Constructor that takes two arguments of type integer.
         /// </summary>
         public TupleInt(int _x, int _y)
         {

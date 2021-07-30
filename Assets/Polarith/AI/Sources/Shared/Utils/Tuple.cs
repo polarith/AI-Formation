@@ -1,6 +1,6 @@
 ﻿//
-// Copyright (c) 2016-2021 Polarith. All rights reserved.
-// Licensed under the Polarith Software and Source Code License Agreement.
+// MIT License
+// Copyright (c) 2021 Polarith.
 // See the LICENSE file in the project root for full license information.
 //
 
