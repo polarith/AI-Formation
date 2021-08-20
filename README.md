@@ -34,8 +34,11 @@ Copyright © 2021 Polarith.
 The code requires the Polarith DLL files that are available in the
 [Unity Asset Store](https://assetstore.unity.com/publishers/23798). The folder structure of this
 repo is the same as in the packages from the asset store. Simply add the DLLs in the
-/Assets/Polarith/AI/Plugins or copy the whole repo to your project that contains Polarith AI. The
-`master` branch of this repository represents the latest stable release of Polarith AI Formations.
+/Assets/Polarith/AI/Plugins or copy the whole repo to your project that contains Polarith AI. If 
+copying manually, it is important NOT TO OVERWRITE the existing files. Otherwise, the GUIDS mismatch.
+For convenience, you can use the download script in /Polarith/AI/Extensions of the Pro and Free 
+package. The `master` branch of this repository represents the latest stable release of Polarith AI 
+Formation.
 
 The `develop` branch of this repository reflects the latest development work which is considered
 stable enough to be prepared for the next release. Be warned, never use this branch in a production
