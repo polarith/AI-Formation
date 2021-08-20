@@ -98,7 +98,7 @@ namespace Polarith.AI.Move
             Vector3 gizmoCenter = Vector3.zero;
             Quaternion rot = Quaternion.identity;
             
-            if (formationV.Shape == FormationV.ShapeType.Planar)
+            if (formationV.Shape == ShapeType.Planar)
             {
                 z = 0;
                 y = (formationV.Layers + (2 * widthV - 0.5f - formationV.SparseLayers)) / 2f * formationV.Spacing;

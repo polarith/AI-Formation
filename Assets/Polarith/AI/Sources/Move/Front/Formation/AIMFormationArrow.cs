@@ -90,7 +90,7 @@ namespace Polarith.AI.Move
 
             Quaternion rot = Quaternion.identity;
 
-            if (formationArrow.Shape == FormationArrow.ShapeType.Planar)
+            if (formationArrow.Shape == ShapeType.Planar)
             {
                 y = 0;
                 x = z;

@@ -32,7 +32,7 @@ namespace Polarith.AI.Move
         private ShapeType shape = ShapeType.Planar;
 
         [Tooltip("Axis-aligned up vector of the agent according to the attached AIMSensor. Note that the " + 
-            "up vector becomes the forward vector if used with ShapeType.NonPlanar.")]
+            "up vector becomes the forward vector if used with ShapeType.Spatial.")]
         [SerializeField]
         private Vector3 upVector;
 
@@ -44,27 +44,6 @@ namespace Polarith.AI.Move
         private int agentsPerLayer;
 
         #endregion // Fields
-
-        #region Enums ==================================================================================================
-
-        /// <summary>
-        /// Defines the visual shape of the formation. You select whether the formation should be build as 2D or 3D
-        /// version, i.e., as a flat wedge or as an arrow.
-        /// </summary>
-        public enum ShapeType
-        {
-            /// <summary>
-            /// 2-dimensional representation (wedge)
-            /// </summary>
-            Planar,
-
-            /// <summary>
-            /// 3-dimensional representation (arrow)
-            /// </summary>
-            NonPlanar
-        } // enum ShapeType
-
-        #endregion // Enums
 
         #region Properties =============================================================================================
 
@@ -140,7 +119,7 @@ namespace Polarith.AI.Move
         private Vector3 ComputeSolid()
         {
             int tmpFormationSize = 0;
-            if (shape == ShapeType.NonPlanar)
+            if (shape == ShapeType.Spatial)
             {
                 while (tmpFormationSize < Size)
                 {
@@ -287,7 +266,7 @@ namespace Polarith.AI.Move
 
         private Vector3 ComputeNonSolid()
         {
-            if (shape == ShapeType.NonPlanar)
+            if (shape == ShapeType.Spatial)
             {
                 layers = 1;
                 int tmpFormationSize = 1;

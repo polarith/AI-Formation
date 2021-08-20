@@ -27,8 +27,7 @@ namespace Polarith.AI.Move
         [SerializeField]
         private bool solid = true;
 
-        [Tooltip("Axis-aligned up vector of the agent according to the attached AIMSensor. Note that the " +
-             "up vector becomes the forward vector if used with ShapeType.NonPlanar.")]
+        [Tooltip("Axis-aligned up vector of the agent according to the attached AIMSensor.")]
         [SerializeField]
         private Vector3 upVector;
 

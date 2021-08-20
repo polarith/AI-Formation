@@ -40,7 +40,7 @@ namespace Polarith.AI.Move
         private ShapeType shape = ShapeType.Planar;
 
         [Tooltip("Axis-aligned up vector of the agent according to the attached AIMSensor. Note that the " +
-            "up vector becomes the forward vector if used with ShapeType.NonPlanar.")]
+            "up vector becomes the forward vector if used with ShapeType.Spatial.")]
         [SerializeField]
         private Vector3 upVector;
 
@@ -52,27 +52,6 @@ namespace Polarith.AI.Move
         private Polarith.Utils.Tuple<int, int> agentLayerId = new Polarith.Utils.Tuple<int, int>(0, 0);
 
         #endregion // Fields
-
-        #region Enums ==================================================================================================
-
-        /// <summary>
-        /// Defines the visual shape of the formation. You select whether the formation should be build as 2D or 3D
-        /// version, i.e., as a flat V or a stacked V.
-        /// </summary>
-        public enum ShapeType
-        {
-            /// <summary>
-            /// 2-dimensional representation (flat V)
-            /// </summary>
-            Planar,
-
-            /// <summary>
-            /// 3-dimensional representation (stacked V)
-            /// </summary>
-            NonPlanar
-        } // enum ShapeType
-
-        #endregion // Enums
 
         #region Properties =============================================================================================
 
@@ -178,9 +157,9 @@ namespace Polarith.AI.Move
             layers = 0;
 
             if (solid)
-                return shape == ShapeType.NonPlanar ? ComputePositionSolid() : ComputePositionSolid2D();
+                return shape == ShapeType.Spatial ? ComputePositionSolid() : ComputePositionSolid2D();
             else
-                return shape == ShapeType.NonPlanar ? ComputePositionNonSolid() : ComputePositionNonSolid2D();
+                return shape == ShapeType.Spatial ? ComputePositionNonSolid() : ComputePositionNonSolid2D();
         }
 
         //--------------------------------------------------------------------------------------------------------------

@@ -87,7 +87,7 @@ namespace Polarith.AI.Move
 
             float x, y, z;
 
-            if (formationBox.Shape == FormationBox.ShapeType.Planar)
+            if (formationBox.Shape == ShapeType.Planar)
             {
                 x = formationBox.AgentsPerLine.X / 2f * formationBox.Spacing;
                 y = formationBox.Layers * formationBox.Spacing / 2f;

@@ -103,7 +103,7 @@ namespace Polarith.AI.Move
             layersY = layersX = layersZ = 0;
 
             // Compute gizmo sizes and offset for y-direction
-            if (formationCross.Shape == FormationCross.ShapeType.Planar)
+            if (formationCross.Shape == ShapeType.Planar)
             {
                 layersY = Mathf.CeilToInt(formationCross.Size / 2f);
                 layersY = formationCross.Size - 2 * Mathf.FloorToInt(layersY / 2f);

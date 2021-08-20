@@ -25,7 +25,7 @@ namespace Polarith.AI.Move
         private ShapeType shape = ShapeType.Planar;
 
         [Tooltip("Axis-aligned up vector of the agent according to the attached AIMSensor. Note that the " +
-            "up vector becomes the forward vector if used with ShapeType.NonPlanar.")]
+            "up vector becomes the forward vector if used with ShapeType.Spatial.")]
         [SerializeField]
         private Vector3 upVector;
 
@@ -33,27 +33,6 @@ namespace Polarith.AI.Move
         private Vector3 layerStart;
 
         #endregion // Fields
-
-        #region Enums ==================================================================================================
-
-        /// <summary>
-        /// Defines the visual shape of the formation. You select whether the formation should be build as 2D or 3D
-        /// version, i.e., as a flat rectangle or as a cuboid.
-        /// </summary>
-        public enum ShapeType
-        {
-            /// <summary>
-            /// 2-dimensional representation (XY-axis)
-            /// </summary>
-            Planar,
-
-            /// <summary>
-            /// 3-dimensional representation (XYZ-axis)
-            /// </summary>
-            NonPlanar
-        } // enum ShapeType
-
-        #endregion // Enums
 
         #region Properties =============================================================================================
 
