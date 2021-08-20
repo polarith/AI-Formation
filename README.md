@@ -1,4 +1,4 @@
-# Polarith AI Formations
+# Polarith AI Formation
 
 ![](Images/polarith-ai.png)
 
@@ -43,7 +43,7 @@ Formation.
 The `develop` branch of this repository reflects the latest development work which is considered
 stable enough to be prepared for the next release. Be warned, never use this branch in a production
 environment. Feel free to branch from develop to add your own extensions or fixes to Polarith AI
-Formations.
+Formation.
 
 All other branches might contain highly experimental work which might be under heavy development at
 the moment. Use at your own risk only.
@@ -72,7 +72,7 @@ track our development progress.
 
 ## License
 
-All parts of Polarith AI Formations are licensed under the [MIT License](LICENSE) which can be found
+All parts of Polarith AI Formation are licensed under the [MIT License](LICENSE) which can be found
 at the root of this repository.
 
 The appropriate image material to comply with the license can be found under the
