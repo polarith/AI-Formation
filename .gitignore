@@ -51,12 +51,4 @@ Thumbs.db
 #=============================#
 # Polarith AI                 #
 #=============================#
-Assets/Polarith/AI/Plugins/Shaders/
-Assets/Polarith/AI/Plugins/Editor/*.dll
-Assets/Polarith/AI/Plugins/Editor/*.dll.meta
-Assets/Polarith/AI/Plugins/Editor/*.xml
-Assets/Polarith/AI/Plugins/Editor/*.xml.meta
-Assets/Polarith/AI/Plugins/*.dll
-Assets/Polarith/AI/Plugins/*.dll.meta
-Assets/Polarith/AI/Plugins/*.xml
-Assets/Polarith/AI/Plugins/*.xml.meta
+Assets/Polarith/AI/Plugins/*
